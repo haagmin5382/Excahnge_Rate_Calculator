@@ -21,6 +21,7 @@ const Calculator = ({ currency, setCurrency, value, setValue }: Props) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="currency"
+          value={currency}
           onChange={setCurrency}
         >
           <MenuItem value={"USA"}>$ (USA)</MenuItem>

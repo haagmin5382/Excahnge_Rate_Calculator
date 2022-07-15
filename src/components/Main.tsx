@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Calculator from "./Calculator";
 import LoopIcon from "@mui/icons-material/Loop";
 import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { getRateData } from "../utils/index";
+
 const Main = () => {
   const [currency1, setCurrency1] = useState("");
   const [value1, setValue1] = useState("");
@@ -24,6 +26,9 @@ const Main = () => {
   const handleValue2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue2(event.target.value as string);
   };
+  useEffect(() => {
+    // setValue2((Number(value1) * 1000).toString());
+  }, [value1, value2]);
   return (
     <div>
       <CssBaseline />
