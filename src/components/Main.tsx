@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Calculator from "./Calculator";
@@ -10,6 +10,7 @@ import { debounce } from "lodash";
 
 const Main = () => {
   // 6 => 위안화 , 8 => 유로화 , 9 => 영국 파운드 , 12 => 일본 엔 ,13 => 한국 원 , 22 => 미국 달러
+
   interface currencyDataType {
     [key: string]: number;
   }
@@ -23,14 +24,12 @@ const Main = () => {
   };
 
   const [currency1, setCurrency1] = useState("USA");
-  const [value1, setValue1] = useState("");
+  const [value1, setValue1] = useState("0");
 
   const [currency2, setCurrency2] = useState("KOREA");
-  const [value2, setValue2] = useState("");
+  const [value2, setValue2] = useState("0");
 
-  const [switching, setSwitching] = useState(true);
-
-  // debounce
+  // debounce 1
   const delaySetValue1 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
@@ -43,7 +42,6 @@ const Main = () => {
           currencyData[currency2] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-        console.log("rate : ", rate, ", rate2 : ", rate2);
 
         setValue2(((Number(value) * rate) / rate2).toString());
       });
@@ -51,7 +49,7 @@ const Main = () => {
     []
   );
 
-  // debounce
+  // debounce 2
   const delaySetValue2 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
@@ -64,8 +62,6 @@ const Main = () => {
           currencyData[currency2] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-        console.log("rate : ", rate, ", rate2 : ", rate2);
-
         setValue1(((Number(value) * rate2) / rate).toString());
       });
     }, 1000),
@@ -74,42 +70,49 @@ const Main = () => {
 
   const handleCurrency1 = (event: SelectChangeEvent) => {
     setCurrency1(event.target.value as string);
-    setSwitching(true);
   };
   const handleCurrency2 = (event: SelectChangeEvent) => {
     setCurrency2(event.target.value as string);
-    setSwitching(false);
   };
   const handleValue1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue1(event.currentTarget.value);
     delaySetValue1(event.currentTarget.value);
-    setSwitching(true);
   };
   const handleValue2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue2(event.currentTarget.value);
     delaySetValue2(event.currentTarget.value);
-    setSwitching(false);
   };
 
   useEffect(() => {
     getRateData().then(({ data }) => {
       // 엔화일 경우 , 100으로 나누어줘야 변환 가능
       const rate =
-        currencyData[currency1] === 12
+        currencyData[currency1] === 12 // 통화가 엔화일 경우
           ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
           : Number(data[currencyData[currency1]].bkpr.replace(",", ""));
       const rate2 =
-        currencyData[currency2] === 12
+        currencyData[currency2] === 12 // 통화가 엔화일 경우
           ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
           : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-      console.log("rate : ", rate, ", rate2 : ", rate2);
-      if (switching) {
-        setValue2(((Number(value1) * rate) / rate2).toString());
-      } else {
-        setValue1(((Number(value2) * rate2) / rate).toString());
-      }
+
+      setValue2(((Number(value1) * rate) / rate2).toString());
     });
-  }, [currency1, currency2]);
+  }, [currency1]);
+
+  useEffect(() => {
+    getRateData().then(({ data }) => {
+      // 엔화일 경우 , 100으로 나누어줘야 변환 가능
+      const rate =
+        currencyData[currency1] === 12 // 통화가 엔화일 경우
+          ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
+          : Number(data[currencyData[currency1]].bkpr.replace(",", ""));
+      const rate2 =
+        currencyData[currency2] === 12 // 통화가 엔화일 경우
+          ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
+          : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
+      setValue1(((Number(value2) * rate2) / rate).toString());
+    });
+  }, [currency2]);
 
   return (
     <div>
