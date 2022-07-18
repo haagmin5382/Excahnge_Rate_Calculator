@@ -7,12 +7,17 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 interface Props {
   currency: string;
-  setCurrency: (e: SelectChangeEvent) => void;
+  handleCurrency: (e: SelectChangeEvent) => void;
   value: string;
-  setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Calculator = ({ currency, setCurrency, value, setValue }: Props) => {
+const Calculator = ({
+  currency,
+  handleCurrency,
+  value,
+  handleValue,
+}: Props) => {
   return (
     <Box sx={{ minWidth: 120, marginTop: 5 }}>
       <FormControl fullWidth>
@@ -22,7 +27,7 @@ const Calculator = ({ currency, setCurrency, value, setValue }: Props) => {
           id="demo-simple-select"
           label="currency"
           value={currency}
-          onChange={setCurrency}
+          onChange={handleCurrency}
         >
           <MenuItem value={"USA"}>$ (USA)</MenuItem>
           <MenuItem value={"CHINA"}>Ұ (CHINA)</MenuItem>
@@ -36,7 +41,8 @@ const Calculator = ({ currency, setCurrency, value, setValue }: Props) => {
           label="Value"
           margin="normal"
           value={value}
-          onChange={setValue}
+          type="number"
+          onChange={handleValue}
         />
       </FormControl>
     </Box>
