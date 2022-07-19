@@ -24,12 +24,22 @@ const Main = () => {
   };
 
   const [currency1, setCurrency1] = useState("USA");
-  const [value1, setValue1] = useState("0");
+  const [value1, setValue1] = useState("");
 
   const [currency2, setCurrency2] = useState("KOREA");
-  const [value2, setValue2] = useState("0");
+  const [value2, setValue2] = useState("");
 
-  // debounce 1
+  const [switching, setSwitching] = useState(true);
+
+  const handleCurrency1 = (event: SelectChangeEvent) => {
+    setCurrency1(event.target.value as string);
+    setSwitching(true);
+  };
+  const handleCurrency2 = (event: SelectChangeEvent) => {
+    setCurrency2(event.target.value as string);
+    setSwitching(false);
+  };
+
   const delaySetValue1 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
@@ -46,10 +56,8 @@ const Main = () => {
         setValue2(((Number(value) * rate) / rate2).toString());
       });
     }, 1000),
-    []
+    [currency1, value1]
   );
-
-  // debounce 2
   const delaySetValue2 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
@@ -62,57 +70,23 @@ const Main = () => {
           currencyData[currency2] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
+
         setValue1(((Number(value) * rate2) / rate).toString());
       });
     }, 1000),
-    []
+    [currency2, value2]
   );
 
-  const handleCurrency1 = (event: SelectChangeEvent) => {
-    setCurrency1(event.target.value as string);
-  };
-  const handleCurrency2 = (event: SelectChangeEvent) => {
-    setCurrency2(event.target.value as string);
-  };
   const handleValue1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue1(event.currentTarget.value);
+    setSwitching(true);
     delaySetValue1(event.currentTarget.value);
   };
   const handleValue2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue2(event.currentTarget.value);
+    setSwitching(false);
     delaySetValue2(event.currentTarget.value);
   };
-
-  useEffect(() => {
-    getRateData().then(({ data }) => {
-      // 엔화일 경우 , 100으로 나누어줘야 변환 가능
-      const rate =
-        currencyData[currency1] === 12 // 통화가 엔화일 경우
-          ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
-          : Number(data[currencyData[currency1]].bkpr.replace(",", ""));
-      const rate2 =
-        currencyData[currency2] === 12 // 통화가 엔화일 경우
-          ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
-          : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-
-      setValue2(((Number(value1) * rate) / rate2).toString());
-    });
-  }, [currency1]);
-
-  useEffect(() => {
-    getRateData().then(({ data }) => {
-      // 엔화일 경우 , 100으로 나누어줘야 변환 가능
-      const rate =
-        currencyData[currency1] === 12 // 통화가 엔화일 경우
-          ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
-          : Number(data[currencyData[currency1]].bkpr.replace(",", ""));
-      const rate2 =
-        currencyData[currency2] === 12 // 통화가 엔화일 경우
-          ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
-          : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-      setValue1(((Number(value2) * rate2) / rate).toString());
-    });
-  }, [currency2]);
 
   return (
     <div>

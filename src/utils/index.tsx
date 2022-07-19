@@ -13,6 +13,6 @@ export function getRateData() {
       ? `${day === 0 ? today.getDate() - 2 : today.getDate() - 1}`
       : `${today.getDate()}`;
   return axios.get(
-    `/api?authkey=${process.env.REACT_APP_KEY}&searchdate=${20220718}&data=AP01`
+    `/api?authkey=${process.env.REACT_APP_KEY}&searchdate=${20220719}&data=AP01`
   );
 }
