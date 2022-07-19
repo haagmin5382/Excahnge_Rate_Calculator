@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Calculator from "./Calculator";
@@ -29,21 +29,18 @@ const Main = () => {
   const [currency2, setCurrency2] = useState("KOREA");
   const [value2, setValue2] = useState("");
 
-  const [switching, setSwitching] = useState(true);
-
   const handleCurrency1 = (event: SelectChangeEvent) => {
     setCurrency1(event.target.value as string);
-    setSwitching(true);
   };
   const handleCurrency2 = (event: SelectChangeEvent) => {
     setCurrency2(event.target.value as string);
-    setSwitching(false);
   };
 
   const delaySetValue1 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
+
         const rate =
           currencyData[currency1] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
@@ -52,16 +49,21 @@ const Main = () => {
           currencyData[currency2] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
-
-        setValue2(((Number(value) * rate) / rate2).toString());
+        setValue1(value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+        setValue2(
+          ((Number(value.replaceAll(",", "")) * rate) / rate2)
+            .toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        );
       });
     }, 1000),
-    [currency1, value1]
+    [currency1, currency2]
   );
   const delaySetValue2 = useCallback(
     debounce((value) => {
       getRateData().then(({ data }) => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
+
         const rate =
           currencyData[currency1] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
@@ -71,20 +73,24 @@ const Main = () => {
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
 
-        setValue1(((Number(value) * rate2) / rate).toString());
+        console.log(currency1, rate, currency2, rate2);
+        setValue2(value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","));
+        setValue1(
+          ((Number(value.replaceAll(",", "")) * rate2) / rate)
+            .toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        );
       });
     }, 1000),
-    [currency2, value2]
+    [currency1, currency2]
   );
 
   const handleValue1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue1(event.currentTarget.value);
-    setSwitching(true);
     delaySetValue1(event.currentTarget.value);
   };
   const handleValue2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue2(event.currentTarget.value);
-    setSwitching(false);
     delaySetValue2(event.currentTarget.value);
   };
 

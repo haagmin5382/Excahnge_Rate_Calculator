@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -18,6 +18,7 @@ const Calculator = ({
   value,
   handleValue,
 }: Props) => {
+  const [example, setExample] = useState("");
   return (
     <Box sx={{ minWidth: 120, marginTop: 5 }}>
       <FormControl fullWidth>
@@ -41,9 +42,10 @@ const Calculator = ({
           label="Value"
           margin="normal"
           value={value}
-          type="number"
+          // type="number"
           onChange={handleValue}
         />
+        {/* <span>{value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span> */}
       </FormControl>
     </Box>
   );
