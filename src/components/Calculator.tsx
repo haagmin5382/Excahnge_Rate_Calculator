@@ -19,7 +19,13 @@ const Calculator = ({
   handleValue,
 }: Props) => {
   return (
-    <Box sx={{ minWidth: 120, marginTop: 5 }}>
+    <Box
+      sx={{
+        minWidth: 120,
+        marginTop: 5,
+        padding: "20px",
+      }}
+    >
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Currency</InputLabel>
         <Select
@@ -29,12 +35,24 @@ const Calculator = ({
           value={currency}
           onChange={handleCurrency}
         >
-          <MenuItem value={"USA"}>$ (USA)</MenuItem>
-          <MenuItem value={"CHINA"}>Ұ (CHINA)</MenuItem>
-          <MenuItem value={"JAPAN"}>¥ (JAPAN)</MenuItem>
-          <MenuItem value={"EURO"}>€ (EURO)</MenuItem>
-          <MenuItem value={"UK"}>£ (UK)</MenuItem>
-          <MenuItem value={"KOREA"}>₩ (KOREA)</MenuItem>
+          <MenuItem sx={{ color: "navy" }} value={"USA"}>
+            $ (USA)
+          </MenuItem>
+          <MenuItem sx={{ color: "red" }} value={"CHINA"}>
+            Ұ (CHINA)
+          </MenuItem>
+          <MenuItem sx={{ color: "pink" }} value={"JAPAN"}>
+            ¥ (JAPAN)
+          </MenuItem>
+          <MenuItem sx={{ color: "green" }} value={"EURO"}>
+            € (EURO)
+          </MenuItem>
+          <MenuItem sx={{ color: "blue" }} value={"UK"}>
+            £ (UK)
+          </MenuItem>
+          <MenuItem sx={{ color: "gray" }} value={"KOREA"}>
+            ₩ (KOREA)
+          </MenuItem>
         </Select>
         <TextField
           id="outlined-number"

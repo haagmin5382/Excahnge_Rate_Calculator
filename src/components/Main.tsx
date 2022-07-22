@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Calculator from "./Calculator";
@@ -59,6 +59,7 @@ const Main = () => {
     debounce((value, Currency) => {
       getRateData().then(({ data }) => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
+
         const rate =
           currencyData[Currency] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[Currency]].bkpr.replace(",", "")) / 100
@@ -98,9 +99,19 @@ const Main = () => {
   );
 
   return (
-    <div>
+    <main>
       <CssBaseline />
-      <Container fixed maxWidth="sm">
+      <Container
+        fixed
+        maxWidth="sm"
+        sx={{
+          border: "2px solid powderblue",
+          borderRadius: "20px",
+          marginTop: "5vh",
+          height: "80vh",
+          background: "powderblue",
+        }}
+      >
         <Calculator
           currency={currency1}
           handleCurrency={handleCurrency1}
@@ -119,7 +130,7 @@ const Main = () => {
           handleValue={handleValue2}
         />
       </Container>
-    </div>
+    </main>
   );
 };
 
