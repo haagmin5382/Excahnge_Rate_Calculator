@@ -7,9 +7,6 @@ import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { getRateData } from "../utils/index";
 import { debounce } from "lodash";
-import { red } from "@mui/material/colors";
-import { ClassNames } from "@emotion/react";
-
 const Main = () => {
   // 6 => 위안화 , 8 => 유로화 , 9 => 영국 파운드 , 12 => 일본 엔 ,13 => 한국 원 , 22 => 미국 달러
 
