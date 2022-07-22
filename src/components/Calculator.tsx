@@ -18,7 +18,6 @@ const Calculator = ({
   value,
   handleValue,
 }: Props) => {
-  const [example, setExample] = useState("");
   return (
     <Box sx={{ minWidth: 120, marginTop: 5 }}>
       <FormControl fullWidth>
@@ -45,7 +44,6 @@ const Calculator = ({
           // type="number"
           onChange={handleValue}
         />
-        {/* <span>{value.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span> */}
       </FormControl>
     </Box>
   );
