@@ -2,7 +2,8 @@
 
 외부 API를 통해서 환율 정보를 가져와서 화폐별 환율을 계산해주는 계산기입니다.
 
-##
+## 배포 링크
+https://chipper-sprite-5d77c3.netlify.app/
 
 ### debounce
 
