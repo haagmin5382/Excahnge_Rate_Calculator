@@ -41,7 +41,6 @@ const Calculator = ({
           label="Value"
           margin="normal"
           value={value}
-          // type="number"
           onChange={handleValue}
         />
       </FormControl>

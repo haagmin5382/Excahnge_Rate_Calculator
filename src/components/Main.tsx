@@ -7,6 +7,8 @@ import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { getRateData } from "../utils/index";
 import { debounce } from "lodash";
+import { red } from "@mui/material/colors";
+import { ClassNames } from "@emotion/react";
 
 const Main = () => {
   // 6 => 위안화 , 8 => 유로화 , 9 => 영국 파운드 , 12 => 일본 엔 ,13 => 한국 원 , 22 => 미국 달러
@@ -49,11 +51,17 @@ const Main = () => {
     delaySetValue2(event.currentTarget.value, currency2);
   };
 
+  const switchValue = () => {
+    setValue1(value2);
+    setValue2(value1);
+    setCurrency1(currency2);
+    setCurrency2(currency1);
+  };
+
   const delaySetValue1 = useCallback(
     debounce((value, Currency) => {
       getRateData().then(({ data }) => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
-
         const rate =
           currencyData[Currency] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[Currency]].bkpr.replace(",", "")) / 100
@@ -102,7 +110,11 @@ const Main = () => {
           value={value1}
           handleValue={handleValue1}
         />
-        <LoopIcon fontSize="large" sx={{ marginTop: 5, marginLeft: 30 }} />
+        <LoopIcon
+          fontSize="large"
+          sx={{ marginTop: 5, marginLeft: 30 }}
+          onClick={switchValue}
+        />
         <Calculator
           currency={currency2}
           handleCurrency={handleCurrency2}
