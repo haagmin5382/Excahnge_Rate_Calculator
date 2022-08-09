@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -37,9 +37,6 @@ const Calculator = ({
         >
           <MenuItem sx={{ color: "navy" }} value={"USA"}>
             $ (USA)
-          </MenuItem>
-          <MenuItem sx={{ color: "red" }} value={"CHINA"}>
-            Ұ (CHINA)
           </MenuItem>
           <MenuItem sx={{ color: "pink" }} value={"JAPAN"}>
             ¥ (JAPAN)
