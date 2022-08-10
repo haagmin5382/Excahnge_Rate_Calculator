@@ -21,6 +21,7 @@ const Header = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              py: 3,
             }}
           >
             Exchange Rate Calculator

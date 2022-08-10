@@ -1,5 +1,3 @@
-import React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -16,12 +14,12 @@ const Footer = () => {
         <Box
           component="footer"
           sx={{
-            py: 3,
+            py: 2,
             px: 2,
             mt: 3,
             backgroundColor: (theme) =>
               theme.palette.mode === "light"
-                ? theme.palette.grey[200]
+                ? theme.palette.grey[300]
                 : theme.palette.grey[800],
           }}
         >
