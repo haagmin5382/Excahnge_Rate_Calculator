@@ -4,8 +4,7 @@
 ![exchange_calculator](https://user-images.githubusercontent.com/81218474/185035210-8c600dd1-5af1-45c9-9044-4bafea15d7b7.gif)
 
 ## 배포 링크
-https://chipper-sprite-5d77c3.netlify.app/
-
+https://precious-pika-63ce55.netlify.app/
 ### debounce
 
 리소스 낭비를 줄이기 위해 숫자를 입력할 때 마다 API를 호출하는 것이 아닌 입력 완료 된후 1초 후에 api를 호출 하는 방식으로 debounce를 적용했습니다.
