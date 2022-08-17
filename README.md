@@ -1,6 +1,7 @@
 # 환율 계산기
 
 외부 API를 통해서 환율 정보를 가져와서 화폐별 환율을 계산해주는 계산기입니다.
+![exchange_calculator](https://user-images.githubusercontent.com/81218474/185035210-8c600dd1-5af1-45c9-9044-4bafea15d7b7.gif)
 
 ## 배포 링크
 https://chipper-sprite-5d77c3.netlify.app/
