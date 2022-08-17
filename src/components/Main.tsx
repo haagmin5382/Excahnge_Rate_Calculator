@@ -15,11 +15,11 @@ const Main = () => {
   }
   const currencyData: currencyDataType = {
     CHINA: 6,
-    EURO: 7,
-    UK: 8,
-    JAPAN: 11,
-    KOREA: 12,
-    USA: 21,
+    EURO: 8,
+    UK: 9,
+    JAPAN: 12,
+    KOREA: 13,
+    USA: 22,
   };
 
   const [currency1, setCurrency1] = useState("USA");
@@ -61,11 +61,11 @@ const Main = () => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
 
         const rate =
-          currencyData[Currency] === 11 // 통화가 엔화일 경우
+          currencyData[Currency] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[Currency]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[Currency]].bkpr.replace(",", ""));
         const rate2 =
-          currencyData[currency2] === 11 // 통화가 엔화일 경우
+          currencyData[currency2] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency2]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency2]].bkpr.replace(",", ""));
 
@@ -83,11 +83,11 @@ const Main = () => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
 
         const rate =
-          currencyData[currency1] === 11 // 통화가 엔화일 경우
+          currencyData[currency1] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[currency1]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[currency1]].bkpr.replace(",", ""));
         const rate2 =
-          currencyData[Currency] === 11 // 통화가 엔화일 경우
+          currencyData[Currency] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[Currency]].bkpr.replace(",", "")) / 100
             : Number(data[currencyData[Currency]].bkpr.replace(",", ""));
 
