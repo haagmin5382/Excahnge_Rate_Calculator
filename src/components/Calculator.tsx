@@ -38,6 +38,9 @@ const Calculator = ({
           <MenuItem sx={{ color: "navy" }} value={"USA"}>
             $ (USA)
           </MenuItem>
+          <MenuItem sx={{ color: "red" }} value={"CHINA"}>
+            Ұ (CHINA)
+          </MenuItem>
           <MenuItem sx={{ color: "pink" }} value={"JAPAN"}>
             ¥ (JAPAN)
           </MenuItem>

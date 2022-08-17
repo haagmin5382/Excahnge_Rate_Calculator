@@ -59,7 +59,7 @@ const Main = () => {
     debounce((value, Currency) => {
       getRateData().then(({ data }) => {
         // 엔화일 경우 , 100으로 나누어줘야 변환 가능
-
+        console.log(data);
         const rate =
           currencyData[Currency] === 12 // 통화가 엔화일 경우
             ? Number(data[currencyData[Currency]].bkpr.replace(",", "")) / 100
