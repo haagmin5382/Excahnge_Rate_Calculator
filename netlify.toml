@@ -7,3 +7,7 @@
   from = "/"
   to ="/index.html"
   status = 200
+
+  [context.production.environment]
+  KEY = "From netlify.toml"
+  REACT_APP_KEY = "From netlify.toml (REACT_APP_)"

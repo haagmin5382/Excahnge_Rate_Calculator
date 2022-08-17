@@ -1,5 +1,5 @@
 import axios from "axios";
 
-export function getRateData() {
+export async function getRateData() {
   return axios.get(`/api`);
 }
